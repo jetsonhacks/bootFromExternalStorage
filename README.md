@@ -11,10 +11,10 @@ There are four scripts here to help with this process.
 The host machine here references a x86 based machine running Ubuntu distribution 16.04 or 18.04.
 
 ### get_jetson_files.sh
-Downloads the Jetson BSP and rootfs for the Xavier Dev Kits. This must be run on the host machine.
+Downloads the Jetson BSP and rootfs for the Xavier Dev Kits. This script must be run on the host machine.
 
 ### install_dependencies.sh
-Install dependencies for flashing the Jetson. This must be run on the host machine.
+Install dependencies for flashing the Jetson. This script must be run on the host machine.
 
 ### flash_jetson_external_storage.sh
 Flashes the Jetson attached to the host via a USB cable. This script must be run on the host machine. The Jetson must be in Force Recovery Mode.
@@ -28,9 +28,9 @@ Usage: ./flash_jetson_external_storage [OPTIONS]
 ```
  
  ### install_jetson_default_packages.sh
- Once the script flash_jetson_external_storage completes, the Jetson is ready to install the default JetPack packages. This script is for the Jetson. You will need to either download the script or clone this repository on the Jetson itself. The Jetson must be connected to the Internet.
+ Once the script flash_jetson_external_storage script completes, the Jetson is ready for setup. First, configure the Jetson through the standard oem-config process. Then you are ready to install the default JetPack packages using this script.  You will need to either download the script or clone this repository on the Jetson itself. The Jetson must be connected to the Internet.
  
- The script will install the metapackage nvida-jetpack which in turn installs the following metapackages:
+ Executing the script will install the metapackage nvida-jetpack which in turn installs the following metapackages:
  
  * nvidia-cuda
  * nvidia-cudnn8
@@ -40,15 +40,13 @@ Usage: ./flash_jetson_external_storage [OPTIONS]
  * nvidia-l4t-jetson-multimedia-api
  * nvidia-opencv
  
- There are other packages installed, so that the configuration matches the default SD Card installation. These include:
+ The script installs other packages, so that the configuration matches the default SD Card installation. These include:
  
  * libtbb-dev
  * uff-converter-tf
  * python3-vpi1
  * python3-libnvinfer-dev
  * Various Python2.7 support files
-
-As usual, configure these to your liking.
 
 ## Release Notes
 
