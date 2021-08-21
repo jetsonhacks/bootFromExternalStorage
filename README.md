@@ -28,7 +28,7 @@ Usage: ./flash_jetson_external_storage [OPTIONS]
 ```
  
  ### install_jetson_default_packages.sh
- Once the script flash_jetson_external_storage completes, the Jetson is ready to install the default JetPack packages. This script should run on the Jetson. You will need to either download the script or clone this repository on the Jetson itself.
+ Once the script flash_jetson_external_storage completes, the Jetson is ready to install the default JetPack packages. This script is for the Jetson. You will need to either download the script or clone this repository on the Jetson itself. The Jetson must be connected to the Internet.
  
  The script will install the metapackage nvida-jetpack which in turn installs the following metapackages:
  
