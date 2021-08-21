@@ -54,4 +54,5 @@ Usage: ./flash_jetson_external_storage [OPTIONS]
 * Initial Release
 * JetPack 4.6
 * L4T 32.6.1
+* Tested on Xavier NX, NVMe SSD
 
