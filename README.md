@@ -8,9 +8,20 @@ JetPack 4.6, L4T 32.6.1
 With the advent of JetPack 4.6, The NVIDIA Jetson Xavier Developer Kits can now boot directly from external storage. 
 There are four scripts here to help with this process.
 
-The host machine here references a x86 based machine running Ubuntu distribution 16.04 or 18.04. To flash a Jetson Developer Kit using this method, the host machine builds a disk image. The host then flashes the disk image to the Jetson. In the case of the Xavier NX there is also flash memory onboard the Jetson module. This memory is named QSPI-Nor. The QSPI holds additional information used during the boot sequence. This script flashes the QSPI memory in addition to the disk image.
+The host machine here references a x86 based machine running Ubuntu distribution 16.04 or 18.04. To flash a Jetson Developer Kit using this method, the host machine builds a disk image. The host then flashes the disk image to the Jetson. 
+
+_**Note for the Jetson Xavier NX:** No SD Card need be present for this process. Also, there is flash memory onboard the Xavier NX module, QSPI-Nor.  This script flashes the QSPI memory in addition to the disk image._
 
 Around 34GB of free space is needed on the host for these scripts and Jetson disk image files.
+
+Sequence on the host:
+1. `install_dependencies.sh` - Installs dependencies needed for running the flash scripts
+2. `get_jetson_files.sh` - Downloads the Jetson BSP and rootfs
+3. `flash_jetson_external_storage.sh` - Flash the Jetson (make sure that the Jetson is connected via USB and in Force Recovery Mode)
+
+Once the Jetson is flashed, switch to the Jetson and go through the standard oem-config procedure. Then from this repository run `install_jetson_default_packages.sh` to install the standard JetPack packages. See below for a list of packages that will be installed.
+
+## Scripts
 
 ### get_jetson_files.sh
 Downloads the Jetson BSP and rootfs for the Xavier Dev Kits. This script must be run on the host machine.
