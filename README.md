@@ -18,7 +18,7 @@ This process will format the external storage attached to the Jetson that you sp
 On the host machine, follow this sequence:
 1. `install_dependencies.sh` - Installs dependencies needed for running the flash scripts
 2. `get_jetson_files.sh` - Downloads the Jetson BSP and rootfs
-3. `flash_jetson_external_storage.sh` - Flash the Jetson (make sure that the Jetson is connected via USB and in Force Recovery Mode)
+3. `flash_jetson_external_storage.sh` - Flash the Jetson (make sure that the Jetson is connected via USB, external storage is attached to the Jetson and that the Jetson is in Force Recovery Mode)
 
 Once the Jetson is flashed, switch to the Jetson. Go through the standard oem-config procedure. On the Jetson, from this repository run the script `install_jetson_default_packages.sh` to install the standard JetPack packages. See below for a detailed list of packages that will be installed.
 
