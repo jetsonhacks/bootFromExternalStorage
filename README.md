@@ -31,8 +31,8 @@ Install dependencies for flashing the Jetson. This script must be run on the hos
 
 ### flash_jetson_external_storage.sh
 Flashes the Jetson attached to the host via a USB cable. This script must be run on the host machine. The Jetson must be in Force Recovery Mode.
-You flash to external storage attached to the Jetson, either NVMe or USB. Default is NVMe. Both the AGX Xavier and Xavier NX 
-Developer Kits have M2.Key M slots which accept NVMe SSDs. 
+The script prepares external storage attached to the Jetson, either NVMe or USB. Default is NVMe as both the AGX Xavier and Xavier NX 
+Developer Kits have M.2 Key M slots which accept NVMe SSDs. For the Xavier NX, this flashes the QSPI memory on the Jetson module.
 ```
 Usage: ./flash_jetson_external_storage [OPTIONS]
   No option flashes to nvme0n1p1 by default
