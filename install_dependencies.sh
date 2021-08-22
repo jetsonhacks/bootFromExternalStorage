@@ -54,4 +54,6 @@ else
   sudo apt install simg2img
 fi
 
+# Install dependency for secure boot
+sudo apt install openssh-server
 
