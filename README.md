@@ -13,14 +13,14 @@ _**Note for the Jetson Xavier NX:** No SD Card need be present for this process.
 Around 34GB of free space is needed on the host for these scripts and Jetson disk image files.
 
 ## WARNING
-This process will reformat the external storage attached to the Jetson that you specify. The data on that drive will not be recoverable.
+This process will format the external storage attached to the Jetson that you specify. Existing data on that drive will not be recoverable.
 
-Sequence on the host:
+On the host machine, follow this sequence:
 1. `install_dependencies.sh` - Installs dependencies needed for running the flash scripts
 2. `get_jetson_files.sh` - Downloads the Jetson BSP and rootfs
 3. `flash_jetson_external_storage.sh` - Flash the Jetson (make sure that the Jetson is connected via USB and in Force Recovery Mode)
 
-Once the Jetson is flashed, switch to the Jetson. Go through the standard oem-config procedure. On the Jetson, run from this repository the script `install_jetson_default_packages.sh` to install the standard JetPack packages. See below for a list of packages that will be installed.
+Once the Jetson is flashed, switch to the Jetson. Go through the standard oem-config procedure. On the Jetson, from this repository run the script `install_jetson_default_packages.sh` to install the standard JetPack packages. See below for a detailed list of packages that will be installed.
 
 ## Scripts
 
