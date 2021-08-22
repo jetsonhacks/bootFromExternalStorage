@@ -53,7 +53,7 @@ Usage: ./flash_jetson_external_storage [OPTIONS]
  * nvidia-l4t-jetson-multimedia-api
  * nvidia-opencv
  
- The script installs other packages, so that the configuration matches the default SD Card installation. These include:
+ The script installs other packages, to match the default SD Card installation. These include:
  
  * libtbb-dev
  * uff-converter-tf
