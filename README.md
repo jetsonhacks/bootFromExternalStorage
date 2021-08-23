@@ -1,6 +1,8 @@
 # bootFromExternalStorage
 Shell scripts to setup a NVIDIA Jetson AGX Xavier or Jetson Xavier NX Developer Kit to boot from external storage.
 
+_**WARNING (08-22-21)** Currently this works for NVMe storage; USB is exhibiting issues on the Xavier NX_
+
 Installs JetPack 4.6, L4T 32.6.1 on the Jetson Developer Kit
 
 With the advent of JetPack 4.6, The NVIDIA Jetson Xavier Developer Kits can now boot directly from external storage. 
