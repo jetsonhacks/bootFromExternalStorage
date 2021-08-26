@@ -68,6 +68,11 @@ sudo tar xpvf ../../tegra_linux_sample-root-filesystem_r32.6.1_aarch64.tbz2
 cd ../..
 tar xvjf secureboot_r32.6.1_aarch64.tbz2
 cd Linux_for_Tegra/
+# The NVIDIA scripts do not officially support Ubuntu 20.04 on the host
+# Set the LDK_ROOTFS_DIR enviornment variable to compensate
+if [[ $(lsb_release -rs) == "20.04" ]] ; then
+  export LDK_ROOTFS_DIR=$PWD
+fi
 sudo ./apply_binaries.sh
 
 

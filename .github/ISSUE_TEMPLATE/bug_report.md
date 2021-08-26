@@ -10,6 +10,9 @@ assignees: ''
 **Describe the issue**
 Please describe the issue
 
+**Which version of Ubuntu on the Host machine**
+Ubuntu version:
+
 **What version of L4T/JetPack**
 L4T/JetPack version:
 

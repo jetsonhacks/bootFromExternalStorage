@@ -54,6 +54,12 @@ else
   sudo apt install simg2img
 fi
 
+# The NVIDIA scripts do not officially support Ubuntu 20.04 on the host
+# Add this package to help
+if [[ $(lsb_release -rs) == "20.04" ]] ; then
+  sudo apt install qemu-user-static
+fi
+
 # Install dependency for secure boot
 sudo apt install openssh-server
 
