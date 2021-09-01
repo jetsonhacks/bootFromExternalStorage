@@ -89,7 +89,7 @@ function check_board_setup
         ;;
       esac
     else
-      if [[ $FLASH_BOARDID == *"jetson-xavier-nx-devkit"* ]] ; then
+      if [[ $FLASH_BOARDID == *"jetson-agx-xavier-devkit"* ]] ; then
          echo "$FLASH_BOARDID" | grep found
       else
          echo "$FLASH_BOARDID" | grep found
