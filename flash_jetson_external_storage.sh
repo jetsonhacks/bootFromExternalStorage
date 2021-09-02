@@ -77,30 +77,49 @@ function check_board_setup
     echo "a USB port and in Force Recovery Mode"
     exit 1
   else
-    if [[ $FLASH_BOARDID == *"jetson-xavier-nx-devkit"* ]] ; then
+    if [[ $FLASH_BOARDID == *"jetson-xavier-agx-devkit"* ]] || [[ $FLASH_BOARDID == *"jetson-xavier-nx-devkit"* ]] ; then
       echo "$FLASH_BOARDID" | grep found
-      read -p "Make sure the force recovery jumper is removed. Continue (Y/n)?" answer
-      case ${answer:0:1} in
-        y|Y )
-        ;;
-        * )
-         echo 'You need to remove the force recovery jumper before flashing.'
-        exit 1
-        ;;
-      esac
-    else
       if [[ $FLASH_BOARDID == *"jetson-xavier-nx-devkit"* ]] ; then
-         echo "$FLASH_BOARDID" | grep found
-      else
-         echo "$FLASH_BOARDID" | grep found
-         echo "ERROR: Unsupported device."
-         echo "This method currently only works for the Jetson AGX Xavier"
-         echo "and Jetson Xavier NX Development Kits."
-         exit 1
+        read -p "Make sure the SD card and the force recovery jumper are removed. Continue (Y/n)?" answer
+        case ${answer:0:1} in
+          y|Y )
+          ;;
+          * )
+          echo 'You need to remove the force recovery jumper before flashing.'
+          exit 1
+          ;;
+        esac
       fi
+    else
+      echo "$FLASH_BOARDID" | grep found
+      echo "ERROR: Unsupported device."
+      echo "This method currently only works for the Jetson AGX Xavier"
+      echo "and Jetson Xavier NX Development Kits."
+      exit 1
    fi
  fi
 }
+
+# If Ubuntu 20.04, /usr/bin/python may not be set
+# The NV flash script uses this symlink to point to Python
+SCRIPT_SET_PYTHON=false
+
+
+# In Ubuntu 20.04, the symbolic link /usr/bin/python is not set
+# The NV scripts use that link to determine the Python to use
+
+function check_python_install
+{
+  if [[ $(lsb_release -rs) == "20.04" ]] ; then
+    if [ ! -L "/usr/bin/python" ] ; then
+      echo "Setting Python"
+      # This will show some warnings from the NV scripts
+      # The NV scripts are for Python 2
+      sudo apt install python-is-python3
+      SCRIPT_SET_PYTHON=true
+    fi 
+  fi
+} 
 
 # Made it this far, we're ready to start the flashy bit
 # Before we flash, we need to shutdown the udisks2 service
@@ -114,16 +133,25 @@ cleanup()
   if [[ ${UDISKS2_ACTIVE} == 'active' ]] ; then
    sudo systemctl start udisks2.service
   fi
+  if [ "$SCRIPT_SET_PYTHON" == true ] ; then
+    echo "Unset python"
+    sudo apt remove python-is-python3
+  fi
   exit
 }
+
 
 function flash_jetson
 {
   local storage=$1
   check_board_setup
+  check_python_install
+  if [[ $(lsb_release -rs) == "20.04" ]] ; then
+    export LC_ALL=C.UTF-8
+  fi 
   # Turn off USB mass storage during flashing
   sudo systemctl stop udisks2.service
-
+  
   # Now do the heavy lifting and flash the Jetson
   echo "Flashing to $storage"
   echo $storage
@@ -132,8 +160,6 @@ function flash_jetson
   # Restart the udisks2 service if it was running when the script was called
   cleanup
 }
-
-
 
 # Parse command line arguments
 storage_arg="nvme0n1p1"
