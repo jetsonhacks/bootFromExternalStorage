@@ -1,16 +1,18 @@
 # bootFromExternalStorage
 Shell scripts to setup a NVIDIA Jetson AGX Xavier or Jetson Xavier NX Developer Kit to boot from external storage.
 
-_**WARNING (08-22-21)** Currently this works for NVMe storage; USB is exhibiting issues on the Xavier NX_
+Support code for the video and article: [**Native Boot for Jetson Xaviers**](https://www.jetsonhacks.com/2021/08/25/native-boot-for-jetson-xaviers/)
+
+**Please read the Issues section below before proceeding**
 
 Installs JetPack 4.6, L4T 32.6.1 on the Jetson Developer Kit
 
 With the advent of JetPack 4.6, The NVIDIA Jetson Xavier Developer Kits can now boot directly from external storage. 
 There are four scripts here to help with this process.
 
-The host machine here references a x86 based machine running Ubuntu distribution 16.04 or 18.04. To flash a Jetson Developer Kit using this method, the host machine builds a disk image. The host then flashes the disk image to the Jetson. 
+The host machine here references a x86 based machine running Ubuntu distribution 16.04 or 18.04. Experimental support for 20.04 is provided. To flash a Jetson Developer Kit using this method, the host machine builds a disk image. The host then flashes the disk image to the Jetson. 
 
-_**Note for the Jetson Xavier NX:** No SD Card need be present for this process. Also, there is flash memory onboard the Xavier NX module, QSPI-Nor.  This script flashes the QSPI memory in addition to the disk image._
+_**Note for the Jetson Xavier NX:** Remove the SD card for this process. Also, there is flash memory onboard the Xavier NX module, QSPI-Nor.  This script flashes the QSPI memory in addition to the disk image._
 
 Around 34GB of free space is needed on the host for these scripts and Jetson disk image files.
 
@@ -64,6 +66,16 @@ Usage: ./flash_jetson_external_storage [OPTIONS]
  * python3-libnvinfer-dev
  * Various Python2.7 support files
 
+## Issues
+* Currently this works for NVMe storage; USB is exhibiting issues on the Xavier NX
+* The Jetson AGX Xavier can be flashed using this method. However there appears to be an issue with oem-config running on first boot.
+
+If oem-config does not run on first boot, you can create a default user:
+
+`sudo ./tools/l4t_create_default_user.sh -u ubuntu -p ubuntu # this command create username ubuntu and password ubuntu`
+
+on the host in the Linux_for_Tegra folder and reflash.
+
 ## Release Notes
 
 ### August 2021
@@ -71,5 +83,12 @@ Usage: ./flash_jetson_external_storage [OPTIONS]
 * JetPack 4.6
 * L4T 32.6.1
 * Tested on Xavier NX, NVMe SSD
-* Initial Host Ubuntu 20.04 support; Thank you Ran Rubin @ranrubin !
+* Initial Host Ubuntu 20.04 support; 
+
+#### Thanks!
+* Thank you Ran @ranrubin for initial Ubuntu 20.04 support.
+* Thank you Richard @RchGrav for pointing out the AGX typo in the flash script.
+* Thank you Jack @jasilberman and Sergey @sskorol for pointing out a Python issue on Ubuntu 20.04
+* Thank you Linh @anhmiuhv for guidance on issues encountered
+* Thank you @diamandbarcode for testing
 
