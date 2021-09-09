@@ -77,7 +77,7 @@ function check_board_setup
     echo "a USB port and in Force Recovery Mode"
     exit 1
   else
-    if [[ $FLASH_BOARDID == *"jetson-xavier-agx-devkit"* ]] || [[ $FLASH_BOARDID == *"jetson-xavier-nx-devkit"* ]] ; then
+    if [[ $FLASH_BOARDID == *"jetson-agx-xavier-devkit"* ]] || [[ $FLASH_BOARDID == *"jetson-xavier-nx-devkit"* ]] ; then
       echo "$FLASH_BOARDID" | grep found
       if [[ $FLASH_BOARDID == *"jetson-xavier-nx-devkit"* ]] ; then
         read -p "Make sure the SD card and the force recovery jumper are removed. Continue (Y/n)?" answer
