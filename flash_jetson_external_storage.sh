@@ -8,7 +8,7 @@
 # First check to see if we're running on Ubuntu
 # Next, check the architecture to make sure it's x86, not a Jetson
 
-JETSON_FOLDER=R32.6.1
+JETSON_FOLDER=R32.7.1
 LINUX_FOR_TEGRA_DIRECTORY="$JETSON_FOLDER/Linux_for_Tegra"
 
 function help_func
