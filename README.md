@@ -5,9 +5,9 @@ Support code for the video and article: [**Native Boot for Jetson Xaviers**](htt
 
 **Please read the Issues section below before proceeding**
 
-Installs JetPack 4.6, L4T 32.6.1 on the Jetson Developer Kit
+Installs JetPack 4.6.1, L4T 32.7.1 on the Jetson Developer Kit
 
-With the advent of JetPack 4.6, The NVIDIA Jetson Xavier Developer Kits can now boot directly from external storage. 
+With the advent of JetPack 4.6.1, The NVIDIA Jetson Xavier Developer Kits can now boot directly from external storage. 
 There are four scripts here to help with this process.
 
 The host machine here references a x86 based machine running Ubuntu distribution 16.04 or 18.04. Experimental support for 20.04 is provided. To flash a Jetson Developer Kit using this method, the host machine builds a disk image. The host then flashes the disk image to the Jetson. 
@@ -80,8 +80,8 @@ on the host in the Linux_for_Tegra folder and reflash.
 
 ### August 2021
 * Initial Release
-* JetPack 4.6
-* L4T 32.6.1
+* JetPack 4.6.1
+* L4T 32.7.1
 * Tested on Xavier NX, NVMe SSD
 * Initial Host Ubuntu 20.04 support; 
 
