@@ -8,21 +8,21 @@
 # First check to see if we're running on Ubuntu
 # Next, check the architecture to make sure it's x86, not a Jetson
 
-JETSON_FOLDER=R32.6.1
+JETSON_FOLDER=R35.1.0
 LINUX_FOR_TEGRA_DIRECTORY="$JETSON_FOLDER/Linux_for_Tegra"
 
 function help_func
 {
-	echo "Usage: ./flash_jetson_external_storage [OPTIONS]"
-	echo "   No option flashes to nvme0n1p1 by default"
-	echo "   -s | --storage - Specific storage media to flash; sda1 or nvme0n1p1"
-	echo "   -h | --help - displays this message"
+  echo "Usage: ./flash_jetson_external_storage [OPTIONS]"
+  echo "   No option flashes to nvme0n1p1 by default"
+  echo "   -s | --storage - Specific storage media to flash; sda1 or nvme0n1p1"
+  echo "   -h | --help - displays this message"
 }
 
 if [ -f /etc/os-release ]; then
   if [[ ! $( grep Ubuntu < /etc/os-release ) ]] ; then
     echo 'WARNING: This does not appear to be an Ubuntu machine. The script is targeted for Ubuntu, and may not work with other distributions.'
-    read -p 'Continue with installation (Y/n)?' answer
+    read -p 'Continue with installation (Y/n)? ' answer
     case ${answer:0:1} in
        y|Y )
          echo Yes
@@ -36,14 +36,14 @@ if [ -f /etc/os-release ]; then
     if [ $(arch) == 'aarch64' ]; then
       echo 'This script must be run from a x86 host machine'
       if [ -f /etc/nv_tegra_release ]; then
-	 echo 'A aarch64 Jetson cannot be the host machine'
+        echo 'A aarch64 Jetson cannot be the host machine'
       fi
       exit
     fi
   fi
 else
     echo 'WARNING: This does not appear to be an Ubuntu machine. The script is targeted for Ubuntu, and may not work with other distributions.'
-    read -p 'Continue with installation (Y/n)?' answer
+    read -p 'Continue with installation (Y/n)? ' answer
     case ${answer:0:1} in
        y|Y )
          echo Yes
@@ -80,7 +80,7 @@ function check_board_setup
     if [[ $FLASH_BOARDID == *"jetson-agx-xavier-devkit"* ]] || [[ $FLASH_BOARDID == *"jetson-xavier-nx-devkit"* ]] ; then
       echo "$FLASH_BOARDID" | grep found
       if [[ $FLASH_BOARDID == *"jetson-xavier-nx-devkit"* ]] ; then
-        read -p "Make sure the SD card and the force recovery jumper are removed. Continue (Y/n)?" answer
+        read -p "Make sure the SD card and the force recovery jumper are removed. Continue (Y/n)? " answer
         case ${answer:0:1} in
           y|Y )
           ;;
@@ -148,7 +148,10 @@ function flash_jetson
   check_python_install
   if [[ $(lsb_release -rs) == "20.04" ]] ; then
     export LC_ALL=C.UTF-8
-  fi 
+  fi
+  if [[ $(lsb_release -rs) == "22.04" ]] ; then
+    export LC_ALL=C.UTF-8
+  fi
   # Turn off USB mass storage during flashing
   sudo systemctl stop udisks2.service
   
@@ -165,7 +168,7 @@ function flash_jetson
 storage_arg="nvme0n1p1"
 
 # If no arguments, assume nvme
-if [  "$1" == "" ]; then
+if [ "$1" == "" ]; then
   flash_jetson "${storage_arg}"
   exit 0
 fi 
@@ -173,22 +176,21 @@ fi
 while [ "$1" != "" ];
 do
    case $1 in
-	-s | --storage )
-		shift
-		storage_arg=$1
-		flash_jetson "${storage_arg}"
-		exit 0;
-		;;
-	-h | --help )
-		help_func
-		exit
-	  ;;
-	* )
-		echo "*** ERROR Invalid flag"
-		help_func
-		exit
-	   ;;
-	esac
-	shift
+  -s | --storage )
+    shift
+    storage_arg=$1
+    flash_jetson "${storage_arg}"
+    exit 0;
+    ;;
+  -h | --help )
+    help_func
+    exit
+    ;;
+  * )
+    echo "*** ERROR Invalid flag"
+    help_func
+    exit
+    ;;
+  esac
+  shift
 done
-
