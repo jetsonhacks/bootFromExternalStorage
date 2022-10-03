@@ -1,4 +1,8 @@
 # bootFromExternalStorage
+<b>These scripts were written before there was official support in the NVIDIA SDK Manager for booting from external storage. The NVIDIA SDK Manager is a tool used to flash and configure the Jetson. Please use the SDK Manager to boot from external storage. To get started: https://developer.nvidia.com/nvidia-sdk-manager</b>
+
+The following is left for historical reasons:
+
 Shell scripts to setup a NVIDIA Jetson AGX Xavier or Jetson Xavier NX Developer Kit to boot from external storage.
 
 Support code for the video and article: [**Native Boot for Jetson Xaviers**](https://www.jetsonhacks.com/2021/08/25/native-boot-for-jetson-xaviers/)
