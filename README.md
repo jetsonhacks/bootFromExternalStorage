@@ -1,4 +1,8 @@
 # bootFromExternalStorage
+<b>These scripts were written before there was official support in the NVIDIA SDK Manager for booting from external storage. The NVIDIA SDK Manager is a tool used to flash and configure the Jetson. Please use the SDK Manager to boot from external storage. To get started: https://developer.nvidia.com/nvidia-sdk-manager</b>
+
+The following is left for historical reasons:
+
 Shell scripts to setup a NVIDIA Jetson AGX Xavier or Jetson Xavier NX Developer Kit to boot from external storage.
 
 Support code for the video and article: [**Native Boot for Jetson Xaviers**](https://www.jetsonhacks.com/2021/08/25/native-boot-for-jetson-xaviers/)
@@ -12,9 +16,20 @@ There are four scripts here to help with this process.
 
 The host machine here references a x86 based machine running Ubuntu distribution 16.04 or 18.04. Experimental support for 20.04 is provided. To flash a Jetson Developer Kit using this method, the host machine builds a disk image. The host then flashes the disk image to the Jetson. 
 
+_**Note for the Jetson Xavier NX:** For a Jetson AGX Xavier system, the board must be initially flashed to eMMC before using this method._
+
 _**Note for the Jetson Xavier NX:** Remove the SD card for this process. Also, there is flash memory onboard the Xavier NX module, QSPI-Nor.  This script flashes the QSPI memory in addition to the disk image._
 
 Around 34GB of free space is needed on the host for these scripts and Jetson disk image files.
+
+## WARNING 1
+JetPack 4.6 requires overlay for certain models:
+* Jetson Xavier NX 16GB
+* Jetson TX2 with PCN209140
+* Jetson AGX Xavier 32GB with PCN208560
+* Jetson AGX Xavier 64GB
+
+The scripts only handle Jetson Xavier NX 16GB and should be modified to accept others. See Patches (overlays): https://developer.nvidia.com/embedded/linux-tegra-r3261 
 
 ## WARNING
 This process will format the external storage attached to the Jetson that you specify. Existing data on that drive will not be recoverable.

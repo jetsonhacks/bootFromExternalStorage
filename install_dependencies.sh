@@ -45,16 +45,18 @@ else
 fi
 
 # Install dependencies
+
 sudo apt update
 sudo apt install libxml2-utils network-manager abootimg sshpass device-tree-compiler nfs-kernel-server lz4
 
+
 # Previous to 18.04, simg2img was in android-tools-fsutils
 if [[ $(lsb_release -rs) == "16.04" ]] ; then
-  sudo apt install android-tools-fsutils
+  sudo apt install android-tools-fsutils -y
 else
-  sudo apt install simg2img qemu-user-static
+  sudo apt install simg2img qemu-user-static -y
 fi
 
 # Install dependency for secure boot
-sudo apt install openssh-server
+sudo apt install openssh-server -y
 
