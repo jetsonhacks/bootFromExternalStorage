@@ -1,35 +1,29 @@
 # bootFromExternalStorage
 <b>These scripts were written before there was official support in the NVIDIA SDK Manager for booting from external storage. The NVIDIA SDK Manager is a tool used to flash and configure the Jetson. Please use the SDK Manager to boot from external storage. To get started: https://developer.nvidia.com/nvidia-sdk-manager</b>
 
-The following is left for historical reasons:
+This repository is left for historical reasons:
 
 Shell scripts to setup a NVIDIA Jetson AGX Xavier or Jetson Xavier NX Developer Kit to boot from external storage.
 
 Support code for the video and article: [**Native Boot for Jetson Xaviers**](https://www.jetsonhacks.com/2021/08/25/native-boot-for-jetson-xaviers/)
 
+_** JetPack 4.6+ releases are in the jetpack-4 branch **_
+
 **Please read the Issues section below before proceeding**
 
 Installs JetPack 4.6, L4T 32.6.1 on the Jetson Developer Kit
 
-With the advent of JetPack 4.6, The NVIDIA Jetson Xavier Developer Kits can now boot directly from external storage. 
+The NVIDIA Jetson Xavier and Orins can boot directly from external storage. 
 There are four scripts here to help with this process.
 
-The host machine here references a x86 based machine running Ubuntu distribution 16.04 or 18.04. Experimental support for 20.04 is provided. To flash a Jetson Developer Kit using this method, the host machine builds a disk image. The host then flashes the disk image to the Jetson. 
+The host machine here references a x86 based machine running Ubuntu distribution 16.04, 18.04 or 20.04. To flash a Jetson Developer Kit using this method, the host machine builds a disk image. The host then flashes the disk image to the Jetson. 
 
 _**Note for the Jetson Xavier NX:** For a Jetson AGX Xavier system, the board must be initially flashed to eMMC before using this method._
 
 _**Note for the Jetson Xavier NX:** Remove the SD card for this process. Also, there is flash memory onboard the Xavier NX module, QSPI-Nor.  This script flashes the QSPI memory in addition to the disk image._
 
-Around 34GB of free space is needed on the host for these scripts and Jetson disk image files.
+Around 34GB of free space is needed on the host for these scripts and Jetson disk image files. More is better.
 
-## WARNING 1
-JetPack 4.6 requires overlay for certain models:
-* Jetson Xavier NX 16GB
-* Jetson TX2 with PCN209140
-* Jetson AGX Xavier 32GB with PCN208560
-* Jetson AGX Xavier 64GB
-
-The scripts only handle Jetson Xavier NX 16GB and should be modified to accept others. See Patches (overlays): https://developer.nvidia.com/embedded/linux-tegra-r3261 
 
 ## WARNING
 This process will format the external storage attached to the Jetson that you specify. Existing data on that drive will not be recoverable.
@@ -44,15 +38,14 @@ Once the Jetson is flashed, switch to the Jetson. Go through the standard oem-co
 ## Scripts
 
 ### get_jetson_files.sh
-Downloads the Jetson BSP and rootfs for the Xavier Dev Kits. This script must be run on the host machine.
+Downloads the Jetson BSP and rootfs for the Xavier/Orin Dev Kits. This script must be run on the host machine.
 
 ### install_dependencies.sh
 Install dependencies for flashing the Jetson. This script must be run on the host machine.
 
 ### flash_jetson_external_storage.sh
 Flashes the Jetson attached to the host via a USB cable. This script must be run on the host machine. The Jetson must be in Force Recovery Mode.
-The script prepares external storage attached to the Jetson, either NVMe or USB. Default is NVMe as both the AGX Xavier and Xavier NX 
-Developer Kits have M.2 Key M slots which accept NVMe SSDs. For the Xavier NX, this flashes the QSPI memory on the Jetson module.
+The script prepares external storage attached to the Jetson, either NVMe or USB. Default is NVMe as the Orin and Xaviers have M.2 Key M slots which accept NVMe SSDs. For the Xavier NX and Orin NX, this flashes the QSPI memory on the Jetson module.
 ```
 Usage: ./flash_jetson_external_storage [OPTIONS]
   No option flashes to nvme0n1p1 by default
