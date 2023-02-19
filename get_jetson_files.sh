@@ -57,10 +57,7 @@ fi
 while [ "$1" != "" ];
 do
    case $1 in
-   --xavier-16 )
-		XAVIER_16=true
-		;;
-	-h | --help )
+ 	-h | --help )
 		help_func
 		exit
 	  ;;
