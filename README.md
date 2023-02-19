@@ -16,6 +16,8 @@ There are four scripts here to help with this process.
 
 The host machine here references a x86 based machine running Ubuntu distribution 16.04 or 18.04. Experimental support for 20.04 is provided. To flash a Jetson Developer Kit using this method, the host machine builds a disk image. The host then flashes the disk image to the Jetson. 
 
+_**Note for the Jetson Xavier NX:** For a Jetson AGX Xavier system, the board must be initially flashed to eMMC before using this method._
+
 _**Note for the Jetson Xavier NX:** Remove the SD card for this process. Also, there is flash memory onboard the Xavier NX module, QSPI-Nor.  This script flashes the QSPI memory in addition to the disk image._
 
 Around 34GB of free space is needed on the host for these scripts and Jetson disk image files.
