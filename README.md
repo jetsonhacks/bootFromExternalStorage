@@ -20,6 +20,15 @@ _**Note for the Jetson Xavier NX:** Remove the SD card for this process. Also, t
 
 Around 34GB of free space is needed on the host for these scripts and Jetson disk image files.
 
+## WARNING 1
+JetPack 4.6 requires overlay for certain models:
+* Jetson Xavier NX 16GB
+* Jetson TX2 with PCN209140
+* Jetson AGX Xavier 32GB with PCN208560
+* Jetson AGX Xavier 64GB
+
+The scripts only handle Jetson Xavier NX 16GB and should be modified to accept others. See Patches (overlays): https://developer.nvidia.com/embedded/linux-tegra-r3261 
+
 ## WARNING
 This process will format the external storage attached to the Jetson that you specify. Existing data on that drive will not be recoverable.
 
