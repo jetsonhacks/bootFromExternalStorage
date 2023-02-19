@@ -2,7 +2,7 @@
 
 # 
 # MIT License
-# Copyright (c) 2021, JetsonHacks
+# Copyright (c) 2021-23, JetsonHacks
 # Install the dependencies required to flash Jetson
 #
 
@@ -26,7 +26,7 @@ if [ -f /etc/os-release ]; then
     if [ $(arch) == 'aarch64' ]; then
       echo 'This script must be run from a x86 host machine'
       if [ -f /etc/nv_tegra_release ]; then
-        echo 'A aarch64 Jetson cannot be the host machine'
+        echo 'An aarch64 Jetson cannot be the host machine'
       fi
       exit
     fi
