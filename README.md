@@ -94,6 +94,7 @@ on the host in the Linux_for_Tegra folder and reflash.
 * Initial Host Ubuntu 20.04 support; 
 
 #### Thanks!
+* Thank you to @KyleLeneau for JetPack 5 initial support
 * Thank you Ran @ranrubin for initial Ubuntu 20.04 support.
 * Thank you Richard @RchGrav for pointing out the AGX typo in the flash script.
 * Thank you Jack @jasilberman and Sergey @sskorol for pointing out a Python issue on Ubuntu 20.04
