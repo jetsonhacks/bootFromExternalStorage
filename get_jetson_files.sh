@@ -3,14 +3,14 @@
 
 # 
 # MIT License
-# Copyright (c) 2021, JetsonHacks
+# Copyright (c) 2021-23, JetsonHacks
 #
 
 # Sanity warning; Make sure we're not running from a Jetson
 # First check to see if we're running on Ubuntu
 # Next, check the architecture to make sure it's not aarch64, not a Jetson
 
-JETSON_FOLDER=R35.1.0
+JETSON_FOLDER=R35.2.1
 
 
 function help_func
@@ -80,10 +80,10 @@ cd $JETSON_FOLDER
 # Get the R352.1.0 Tegra system
 # Get the L4T Driver Package - BSP
 wget -N https://developer.nvidia.com/embedded/l4t/r35_release_v1.0/release/jetson_linux_r35.1.0_aarch64.tbz2
+wget -N https://developer.nvidia.com/downloads/jetson-linux-r3521-aarch64tbz2
 # Get the Sample Root File System (rootfs)
 wget -N https://developer.nvidia.com/embedded/l4t/r35_release_v1.0/release/tegra_linux_sample-root-filesystem_r35.1.0_aarch64.tbz2
-# Get the Secure Boot package
-wget -N https://developer.nvidia.com/embedded/L4T/r35_Release_v1.0/Release/secureboot_R35.1.0_aarch64.tbz2
+wget -N https://developer.nvidia.com/downloads/linux-sample-root-filesystem-r3521aarch64tbz2
 
 # Unpack the files, creating the Linux_for_Tegra folder
 
@@ -91,9 +91,7 @@ wget -N https://developer.nvidia.com/embedded/L4T/r35_Release_v1.0/Release/secur
 sudo tar xpvf jetson_linux_r35.1.0_aarch64.tbz2
 
 cd Linux_for_Tegra/rootfs/
-sudo tar xpvf ../../tegra_linux_sample-root-filesystem_r35.1.0_aarch64.tbz2
-cd ../..
-tar xvjf secureboot_R35.1.0_aarch64.tbz2
+sudo tar xpvf ../../linux-sample-root-filesystem-r3521aarch64tbz2
 cd Linux_for_Tegra/
 
 # The NVIDIA scripts do not officially support Ubuntu 20.04 OR 22.04 on the host
