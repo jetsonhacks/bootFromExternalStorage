@@ -3,6 +3,37 @@
 #Copyright (c) 2021 Jetsonhacks
 
 # Flash Jetson Xavier to run from external storage
+# Some helper functions. These scripts only flash Jetson Orins and Xaviers
+
+declare -a device_names=(
+    "jetson-agx-orin-devkit"
+    "jetson-agx-xavier-devkit"
+    "jetson-agx-xavier-industrial"
+    "jetson-xavier-nx-devkit"
+    "jetson-xavier-nx-devkit-emmc"    
+  
+)
+
+function is_xavier() {
+    local input=$1
+    for device_name in "${device_names[@]}"; do
+        if [[ "$device_name" == "$input" ]] && [[ "$device_name" == *"xavier"* ]]; then
+            return true
+        fi
+    done
+    return false
+}
+
+function is_orin() {
+    local input=$1
+    for device_name in "${device_names[@]}"; do
+        if [[ "$device_name" == "$input" ]] && [[ "$device_name" == *"orin"* ]]; then
+            return true
+        fi
+    done
+    return false
+}
+
 
 # Sanity warning; Make sure we're not running from a Jetson
 # First check to see if we're running on Ubuntu
@@ -77,7 +108,7 @@ function check_board_setup
     echo "a USB port and in Force Recovery Mode"
     exit 1
   else
-    if [[ $FLASH_BOARDID == *"jetson-agx-xavier-devkit"* ]] || [[ $FLASH_BOARDID == *"jetson-xavier-nx-devkit"* ]] ; then
+    if is_orin $FLASH_BOARDID || is_xavier $FLASH_BOARDID ; then
       echo "$FLASH_BOARDID" | grep found
       if [[ $FLASH_BOARDID == *"jetson-xavier-nx-devkit"* ]] ; then
         read -p "Make sure the SD card and the force recovery jumper are removed. Continue (Y/n)? " answer
@@ -93,8 +124,7 @@ function check_board_setup
     else
       echo "$FLASH_BOARDID" | grep found
       echo "ERROR: Unsupported device."
-      echo "This method currently only works for the Jetson AGX Xavier"
-      echo "and Jetson Xavier NX Development Kits."
+      echo "This method currently only works for the Jetson Xavier or Jetson Orin"
       exit 1
    fi
  fi
