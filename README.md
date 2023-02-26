@@ -1,7 +1,5 @@
 # bootFromExternalStorage
-<b>These scripts were written before there was official support in the NVIDIA SDK Manager for booting from external storage. The NVIDIA SDK Manager is a tool used to flash and configure the Jetson. Please use the SDK Manager to boot from external storage. To get started: https://developer.nvidia.com/nvidia-sdk-manager</b>
-
-This repository is left for historical reasons:
+<b>These scripts were written before there was official support in the NVIDIA SDK Manager for booting from external storage. The NVIDIA SDK Manager is a tool used to flash and configure the Jetson. You may prefer to use the SDK Manager instead of these scripts. To get started with SDK Manager: https://developer.nvidia.com/nvidia-sdk-manager</b>
 
 Shell scripts to setup a NVIDIA Jetson AGX Xavier or Jetson Xavier NX Developer Kit to boot from external storage.
 
@@ -11,12 +9,12 @@ _** JetPack 4.6+ releases are in the jetpack-4 branch **_
 
 **Please read the Issues section below before proceeding**
 
-Installs JetPack 4.6, L4T 32.6.1 on the Jetson Developer Kit
+Installs JetPack 5.1, L4T 35.2.1 on the Jetson Developer Kit
 
 The NVIDIA Jetson Xavier and Orins can boot directly from external storage. 
 There are four scripts here to help with this process.
 
-The host machine here references a x86 based machine running Ubuntu distribution 16.04, 18.04 or 20.04. To flash a Jetson Developer Kit using this method, the host machine builds a disk image. The host then flashes the disk image to the Jetson. 
+The host machine here references a x86 based machine running Ubuntu distribution 16.04, 18.04, 20.04 or 22.04. To flash a Jetson Developer Kit using this method, the host machine builds a disk image. The host then flashes the disk image to the Jetson. 
 
 _**Note for the Jetson Xavier NX:** For a Jetson AGX Xavier system, the board must be initially flashed to eMMC before using this method._
 
@@ -85,6 +83,13 @@ If oem-config does not run on first boot, you can create a default user:
 on the host in the Linux_for_Tegra folder and reflash.
 
 ## Release Notes
+
+### February 2023
+* JetPack 5.1
+* L4T 35.2.1
+* JetPack 4.X are in the JetPack 4.x branch
+* Tested on Xavier NX, NVMe SSD
+* Tested on x86 host running Ubuntu 20.04
 
 ### August 2021
 * Initial Release
