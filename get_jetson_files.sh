@@ -88,6 +88,7 @@ sudo tar -xpvf jetson-linux-r3521-aarch64tbz2
 
 cd Linux_for_Tegra/rootfs/
 sudo tar xpvf ../../linux-sample-root-filesystem-r3521aarch64tbz2
+cd ../..
 cd Linux_for_Tegra/
 
 # The NVIDIA scripts do not officially support Ubuntu 20.04 OR 22.04 on the host
