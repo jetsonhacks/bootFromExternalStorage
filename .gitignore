@@ -1,2 +1,3 @@
 # Ignore the BSP and roofts
-R32.6.1/
+R32*/
+R35*/
