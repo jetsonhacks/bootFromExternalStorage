@@ -1,6 +1,10 @@
 #!/bin/bash
 #MIT License
-#Copyright (c) 2021 Jetsonhacks
+#Copyright (c) 2021-23 Jetsonhacks
+
+JETSON_FOLDER=R35.2.1
+LINUX_FOR_TEGRA_DIRECTORY="$JETSON_FOLDER/Linux_for_Tegra"
+
 
 # Flash Jetson Xavier to run from external storage
 # Some helper functions. These scripts only flash Jetson Orins and Xaviers
@@ -14,24 +18,25 @@ declare -a device_names=(
   
 )
 
+# In a shell script, 0 is success (True)
 function is_xavier() {
     local input=$1
     for device_name in "${device_names[@]}"; do
         if [[ "$device_name" == "$input" ]] && [[ "$device_name" == *"xavier"* ]]; then
-            return true
+            return 0
         fi
     done
-    return false
+    return 1
 }
 
 function is_orin() {
     local input=$1
     for device_name in "${device_names[@]}"; do
         if [[ "$device_name" == "$input" ]] && [[ "$device_name" == *"orin"* ]]; then
-            return true
+            return 0
         fi
     done
-    return false
+    return 1
 }
 
 
@@ -39,8 +44,6 @@ function is_orin() {
 # First check to see if we're running on Ubuntu
 # Next, check the architecture to make sure it's x86, not a Jetson
 
-JETSON_FOLDER=R35.1.0
-LINUX_FOR_TEGRA_DIRECTORY="$JETSON_FOLDER/Linux_for_Tegra"
 
 function help_func
 {
@@ -63,7 +66,7 @@ if [ -f /etc/os-release ]; then
        ;;
     esac
     
-  else
+  elsenvme0n1p1
     if [ $(arch) == 'aarch64' ]; then
       echo 'This script must be run from a x86 host machine'
       if [ -f /etc/nv_tegra_release ]; then
@@ -97,6 +100,8 @@ function check_board_setup
   echo $PWD
   # Check to see if we can see the Jetson
   echo "Checking Jetson ..."
+  
+ 
 
   FLASH_BOARDID=$(sudo ./nvautoflash.sh --print_boardid)
   if [ $? -eq 1 ] ; then
@@ -108,6 +113,12 @@ function check_board_setup
     echo "a USB port and in Force Recovery Mode"
     exit 1
   else
+    # get the last line with trailing spaces removed
+    # echo "$FLASH_BOARDID" | sed -e 's/ *$//' | tail -n 1
+    last_line=$(echo "$FLASH_BOARDID" | sed -e 's/ *$//' | tail -n 1)
+    # remove the string "found." from the last line
+    FLASH_BOARDID=$(echo "$last_line" | sed -e 's/found\.$//')
+    echo $FLASH_BOARDID
     if is_orin $FLASH_BOARDID || is_xavier $FLASH_BOARDID ; then
       echo "$FLASH_BOARDID" | grep found
       if [[ $FLASH_BOARDID == *"jetson-xavier-nx-devkit"* ]] ; then
