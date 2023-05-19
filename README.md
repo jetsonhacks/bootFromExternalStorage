@@ -47,7 +47,7 @@ Install dependencies for flashing the Jetson. This script must be run on the hos
 
 ### flash_jetson_external_storage.sh
 Flashes the Jetson attached to the host via a USB cable. This script must be run on the host machine. The Jetson must be in Force Recovery Mode.
-The script prepares external storage attached to the Jetson, either NVMe or USB. Default is NVMe as the Orin and Xaviers have M.2 Key M slots which accept NVMe SSDs. For the Xavier NX and Orin NX, this flashes the QSPI memory on the Jetson module.
+The script prepares external storage attached to the Jetson, either NVMe or USB. Default is NVMe as the Orin and Xaviers have M.2 Key M slots which accept NVMe SSDs. The SSDs must be PCIE, SATA does not work. For the Xavier NX and Orin NX and Orin Nano, this flashes the QSPI memory on the Jetson module.
 ```
 Usage: ./flash_jetson_external_storage [OPTIONS]
   No option flashes to nvme0n1p1 by default
