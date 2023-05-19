@@ -1,6 +1,6 @@
 #!/bin/bash
 # MIT License
-# Copyright (c) 2021 Jetsonhacks
+# Copyright (c) 2021-23 Jetsonhacks
 
 #
 # Run this script on the Jetson after flashing.

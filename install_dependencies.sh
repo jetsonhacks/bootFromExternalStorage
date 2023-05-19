@@ -6,6 +6,8 @@
 # Install the dependencies required to flash Jetson
 #
 
+JETSON_FOLDER=R35.3.1
+
 # Sanity warning; Make sure we're not running from a Jetson
 # First check to see if we're running on Ubuntu
 # Next, check the architecture to make sure it's x86, not a Jetson
@@ -45,18 +47,19 @@ else
 fi
 
 # Install dependencies
+if [ ! -d "./$JETSON_FOLDER/Linux_for_Tegra/tools/" ]; then
+   echo "Error: You must install the BSP and rootFS for $JETSON_FOLDER before the prerequisites"
+   exit
+fi
 
-sudo apt update
-sudo apt install libxml2-utils network-manager abootimg sshpass device-tree-compiler nfs-kernel-server lz4
-
+cd $JETSON_FOLDER
+./Linux_for_Tegra/tools/l4t_flash_prerequisites.sh
 
 # Previous to 18.04, simg2img was in android-tools-fsutils
+# You should not be flashing from 16.04!
 if [[ $(lsb_release -rs) == "16.04" ]] ; then
   sudo apt install android-tools-fsutils -y
-else
-  sudo apt install simg2img qemu-user-static -y
 fi
 
 # Install dependency for secure boot
 sudo apt install openssh-server -y
-

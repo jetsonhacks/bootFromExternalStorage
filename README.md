@@ -1,7 +1,7 @@
 # bootFromExternalStorage
 <b>These scripts were written before there was official support in the NVIDIA SDK Manager for booting from external storage. The NVIDIA SDK Manager is a tool used to flash and configure the Jetson. You may prefer to use the SDK Manager instead of these scripts. To get started with SDK Manager: https://developer.nvidia.com/nvidia-sdk-manager</b>
 
-Shell scripts to setup a NVIDIA Jetson AGX Xavier or Jetson Xavier NX Developer Kit to boot from external storage.
+Shell scripts to setup a NVIDIA Jetson Xavier or Orin (AGX, NX, Nano models) to boot from external storage.
 
 Support code for the video and article: [**Native Boot for Jetson Xaviers**](https://www.jetsonhacks.com/2021/08/25/native-boot-for-jetson-xaviers/)
 
@@ -9,26 +9,30 @@ _** JetPack 4.6+ releases are in the jetpack-4 branch **_
 
 **Please read the Issues section below before proceeding**
 
-Installs JetPack 5.1, L4T 35.2.1 on the Jetson Developer Kit
+Installs JetPack 5.1.1, L4T 35.3.1 on the Jetson Developer Kit
 
 The NVIDIA Jetson Xavier and Orins can boot directly from external storage. 
 There are four scripts here to help with this process.
 
-The host machine here references a x86 based machine running Ubuntu distribution 16.04, 18.04, 20.04 or 22.04. To flash a Jetson Developer Kit using this method, the host machine builds a disk image. The host then flashes the disk image to the Jetson. 
+The host machine here references a x86 based machine running Ubuntu distribution 18.04, 20.04 or 22.04. To flash a Jetson Developer Kit using this method, the host machine builds a disk image. The host then flashes the disk image to the Jetson. 
+
+_**Warning for the Jetson Xavier NX and AGX Xavier:** There is an issue with the USB stack. You cannot boot from USB on these systems._
 
 _**Note for the Jetson Xavier NX:** For a Jetson AGX Xavier system, the board must be initially flashed to eMMC before using this method._
 
 _**Note for the Jetson Xavier NX:** Remove the SD card for this process. Also, there is flash memory onboard the Xavier NX module, QSPI-Nor.  This script flashes the QSPI memory in addition to the disk image._
 
-Around 34GB of free space is needed on the host for these scripts and Jetson disk image files. More is better.
+_**Note for the Jetson Orin Nano and Orin NX:** There is flash memory onboard the Orin modules, QSPI-Nor.  This script flashes the QSPI memory in addition to the disk image._
+
+Around 40GB of free space is needed on the host for these scripts and Jetson disk image files. More is better.
 
 
 ## WARNING
 This process will format the external storage attached to the Jetson that you specify. Existing data on that drive will not be recoverable.
 
 On the host machine, follow this sequence:
-1. `install_dependencies.sh` - Installs dependencies needed for running the flash scripts
-2. `get_jetson_files.sh` - Downloads the Jetson BSP and rootfs
+1. `get_jetson_files.sh` - Downloads the Jetson BSP and sample rootfs, copies NVIDA user space libraries to rootfs
+2. `install_dependencies.sh` - Installs dependencies needed for running the flash scripts
 3. `flash_jetson_external_storage.sh` - Flash the Jetson (make sure that the Jetson is connected via USB, external storage is attached to the Jetson and that the Jetson is in Force Recovery Mode)
 
 Once the Jetson is flashed, switch to the Jetson. Go through the standard oem-config procedure. On the Jetson, from this repository run the script `install_jetson_default_packages.sh` to install the standard JetPack packages. See below for a detailed list of packages that will be installed.
@@ -57,7 +61,7 @@ Usage: ./flash_jetson_external_storage [OPTIONS]
  Executing the script will install the metapackage nvida-jetpack which in turn installs the following metapackages:
  
  * nvidia-cuda
- * nvidia-cudnn8
+ * nvidia-cudnn
  * nvidia-tensorrt
  * nvidia-visionworks
  * nvidia-vpi
@@ -83,6 +87,13 @@ If oem-config does not run on first boot, you can create a default user:
 on the host in the Linux_for_Tegra folder and reflash.
 
 ## Release Notes
+
+### May 2023
+* JetPack 5.1.1
+* L4T 35.3.1
+* Add support for Orin Nano Developer Kit
+* Tested on Orin Nano, NVMe SSD
+* Tested on x86 host running Ubuntu 20.04
 
 ### February 2023
 * JetPack 5.1

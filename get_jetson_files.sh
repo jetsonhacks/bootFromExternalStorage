@@ -10,7 +10,7 @@
 # First check to see if we're running on Ubuntu
 # Next, check the architecture to make sure it's not aarch64, not a Jetson
 
-JETSON_FOLDER=R35.2.1
+JETSON_FOLDER=R35.3.1
 
 
 function help_func
@@ -79,20 +79,18 @@ cd $JETSON_FOLDER
 
 # Get the R352.1.0 Tegra system
 # Get the L4T Driver Package - BSP
-wget -N https://developer.nvidia.com/downloads/jetson-linux-r3521-aarch64tbz2
+wget -N https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v3.1/release/jetson_linux_r35.3.1_aarch64.tbz2
 # Get the Sample Root File System (rootfs)
-wget -N https://developer.nvidia.com/downloads/linux-sample-root-filesystem-r3521aarch64tbz2
+wget -N https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v3.1/release/tegra_linux_sample-root-filesystem_r35.3.1_aarch64.tbz2
 
 # Unpack the files, creating the Linux_for_Tegra folder
-sudo tar -xpvf jetson-linux-r3521-aarch64tbz2
+sudo tar -xpvf jetson_linux_r35.3.1_aarch64.tbz2
 
 cd Linux_for_Tegra/rootfs/
-sudo tar xpvf ../../linux-sample-root-filesystem-r3521aarch64tbz2
+sudo tar -xpvf ../../tegra_linux_sample-root-filesystem_r35.3.1_aarch64.tbz2
 cd ../..
 cd Linux_for_Tegra/
 
-# The NVIDIA scripts do not officially support Ubuntu 20.04 OR 22.04 on the host
-# Set the LDK_ROOTFS_DIR enviornment variable to compensate
 if [[ $(lsb_release -rs) == "20.04" ]] ; then
   export LDK_ROOTFS_DIR=$PWD
 fi
@@ -100,4 +98,5 @@ if [[ $(lsb_release -rs) == "22.04" ]] ; then
   export LDK_ROOTFS_DIR=$PWD
 fi
 
+# Copy NVIDIA user space libraries into target file system
 sudo ./apply_binaries.sh
