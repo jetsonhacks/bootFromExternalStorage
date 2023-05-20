@@ -77,7 +77,7 @@ cd $JETSON_FOLDER
 
 # Made it this far, we're ready to start the downloads
 
-# Get the R352.1.0 Tegra system
+# Get the 35.3.1 Tegra system
 # Get the L4T Driver Package - BSP
 wget -N https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v3.1/release/jetson_linux_r35.3.1_aarch64.tbz2
 # Get the Sample Root File System (rootfs)
@@ -100,3 +100,5 @@ fi
 
 # Copy NVIDIA user space libraries into target file system
 sudo ./apply_binaries.sh
+# Install the prerequisite dependencies for flashing
+sudo ./tools/l4t_flash_prerequisites.sh
