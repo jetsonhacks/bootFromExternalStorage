@@ -31,9 +31,8 @@ Around 40GB of free space is needed on the host for these scripts and Jetson dis
 This process will format the external storage attached to the Jetson that you specify. Existing data on that drive will not be recoverable.
 
 On the host machine, follow this sequence:
-1. `get_jetson_files.sh` - Downloads the Jetson BSP and sample rootfs, copies NVIDA user space libraries to rootfs
-2. `install_dependencies.sh` - Installs dependencies needed for running the flash scripts
-3. `flash_jetson_external_storage.sh` - Flash the Jetson (make sure that the Jetson is connected via USB, external storage is attached to the Jetson and that the Jetson is in Force Recovery Mode)
+1. `get_jetson_files.sh` - Downloads the Jetson BSP and sample rootfs, copies NVIDA user space libraries to rootfs. Also installs dependencies needed to flash the Jetson.
+2. `flash_jetson_external_storage.sh` - Flash the Jetson (make sure that the Jetson is connected via USB, external storage is attached to the Jetson and that the Jetson is in Force Recovery Mode)
 
 Once the Jetson is flashed, switch to the Jetson. Go through the standard oem-config procedure. On the Jetson, from this repository run the script `install_jetson_default_packages.sh` to install the standard JetPack packages. See below for a detailed list of packages that will be installed.
 
@@ -43,7 +42,7 @@ Once the Jetson is flashed, switch to the Jetson. Go through the standard oem-co
 Downloads the Jetson BSP and rootfs for the Xavier/Orin Dev Kits. This script must be run on the host machine.
 
 ### install_dependencies.sh
-Install dependencies for flashing the Jetson. This script must be run on the host machine.
+Install dependencies for flashing the Jetson. This script must be run on the host machine. This is done by get_jetson_files.sh, but is added here as legacy.
 
 ### flash_jetson_external_storage.sh
 Flashes the Jetson attached to the host via a USB cable. This script must be run on the host machine. The Jetson must be in Force Recovery Mode.
