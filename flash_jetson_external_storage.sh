@@ -68,7 +68,7 @@ if [ -f /etc/os-release ]; then
        ;;
     esac
     
-  elsenvme0n1p1
+  else
     if [ $(arch) == 'aarch64' ]; then
       echo 'This script must be run from a x86 host machine'
       if [ -f /etc/nv_tegra_release ]; then
