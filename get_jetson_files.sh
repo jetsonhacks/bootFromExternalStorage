@@ -10,7 +10,7 @@
 # First check to see if we're running on Ubuntu
 # Next, check the architecture to make sure it's not aarch64, not a Jetson
 
-JETSON_FOLDER=R35.3.1
+JETSON_FOLDER=R35.4.1
 
 
 function help_func
@@ -77,17 +77,17 @@ cd $JETSON_FOLDER
 
 # Made it this far, we're ready to start the downloads
 
-# Get the 35.3.1 Tegra system
+# Get the 35.4.1 Tegra system
 # Get the L4T Driver Package - BSP
-wget -N https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v3.1/release/jetson_linux_r35.3.1_aarch64.tbz2
+wget -N https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v4.1/release/jetson_linux_r35.4.1_aarch64.tbz2
 # Get the Sample Root File System (rootfs)
-wget -N https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v3.1/release/tegra_linux_sample-root-filesystem_r35.3.1_aarch64.tbz2
+wget -N https://developer.nvidia.com/downloads/embedded/l4t/r35_release_v4.1/release/tegra_linux_sample-root-filesystem_r35.4.1_aarch64.tbz2
 
 # Unpack the files, creating the Linux_for_Tegra folder
-sudo tar -xpvf jetson_linux_r35.3.1_aarch64.tbz2
+sudo tar -xpvf jetson_linux_r35.4.1_aarch64.tbz2
 
 cd Linux_for_Tegra/rootfs/
-sudo tar -xpvf ../../tegra_linux_sample-root-filesystem_r35.3.1_aarch64.tbz2
+sudo tar -xpvf ../../tegra_linux_sample-root-filesystem_r35.4.1_aarch64.tbz2
 cd ../..
 cd Linux_for_Tegra/
 

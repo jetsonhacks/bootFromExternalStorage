@@ -2,13 +2,13 @@
 #MIT License
 #Copyright (c) 2021-23 Jetsonhacks
 
-JETSON_FOLDER=R35.3.1
+JETSON_FOLDER=R35.4.1
 LINUX_FOR_TEGRA_DIRECTORY="$JETSON_FOLDER/Linux_for_Tegra"
 
 
 # Flash Jetson Xavier to run from external storage
 # Some helper functions. These scripts only flash Jetson Orins and Xaviers
-# https://docs.nvidia.com/jetson/archives/r35.3.1/DeveloperGuide/text/IN/QuickStart.html#jetson-modules-and-configurations
+# https://docs.nvidia.com/jetson/archives/r35.4.1/DeveloperGuide/text/IN/QuickStart.html#jetson-modules-and-configurations
 
 declare -a device_names=(
     "jetson-agx-orin-devkit"
