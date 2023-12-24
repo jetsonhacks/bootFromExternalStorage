@@ -51,7 +51,7 @@ function help_func
 {
   echo "Usage: ./flash_jetson_external_storage [OPTIONS]"
   echo "   No option flashes to nvme0n1p1 by default"
-  echo "   -s | --storage - Specific storage media to flash; sda1 or nvme0n1p1"
+  echo "   -s | --storage - Specific storage media to flash; sda1, nvme0n1p1 or mmcblk1p1"
   echo "   -h | --help - displays this message"
 }
 
